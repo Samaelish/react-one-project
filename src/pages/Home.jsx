@@ -1,28 +1,45 @@
-import MovieCard from '../components/MovieCard'
+import GameCard from '../components/GameCard'
 import { useState, useEffect } from 'react'
-import { searchMovies, getPopularMovies } from '../services/api'
+import { searchMovies, getPopularMovies, getPopularGames } from '../services/api'
 import '../css/Home.css'
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState('')
   const [movies, setMovies] = useState([])
+  const [games, setGames] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  // useEffect(() => {
+  //   const loadPopularMovies = async () => {
+  //     try {
+  //       const popularMovies = await getPopularMovies()
+  //       setMovies(popularMovies)
+  //     } catch (err) {
+  //       console.log(err)
+  //       setError('Failed to load movies...')
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
+
+  //   loadPopularMovies()
+  // }, [])
+  // loading games
   useEffect(() => {
-    const loadPopularMovies = async () => {
+    const loadPopularGames = async () => {
       try {
-        const popularMovies = await getPopularMovies()
-        setMovies(popularMovies)
+        const popularGames = await getPopularGames()
+        setGames(popularGames)
       } catch (err) {
         console.log(err)
-        setError('Failed to load movies...')
+        setError('Failed to load games...')
       } finally {
         setLoading(false)
       }
     }
 
-    loadPopularMovies()
+    loadPopularGames()
   }, [])
 
   const handleSearch = async e => {
@@ -48,7 +65,7 @@ function Home() {
       <form onSubmit={handleSearch} className='search-form'>
         <input
           type='text'
-          placeholder='Search for movies...'
+          placeholder='Search for games...'
           className='search-input'
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
@@ -63,9 +80,9 @@ function Home() {
       {loading ? (
         <div className='loading'>Loading...</div>
       ) : (
-        <div className='movies-grid'>
-          {movies.map(movie => (
-            <MovieCard movie={movie} key={movie.id} />
+        <div className='games-grid'>
+          {games.map(game => (
+            <GameCard game={game} key={game.id} />
           ))}
         </div>
       )}
