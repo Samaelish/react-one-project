@@ -1,31 +1,14 @@
 import GameCard from '../components/GameCard'
 import { useState, useEffect } from 'react'
-import { searchMovies, getPopularMovies, getPopularGames } from '../services/api'
+import { searchGames, getPopularGames } from '../services/api'
 import '../css/Home.css'
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [movies, setMovies] = useState([])
   const [games, setGames] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  // useEffect(() => {
-  //   const loadPopularMovies = async () => {
-  //     try {
-  //       const popularMovies = await getPopularMovies()
-  //       setMovies(popularMovies)
-  //     } catch (err) {
-  //       console.log(err)
-  //       setError('Failed to load movies...')
-  //     } finally {
-  //       setLoading(false)
-  //     }
-  //   }
-
-  //   loadPopularMovies()
-  // }, [])
-  // loading games
   useEffect(() => {
     const loadPopularGames = async () => {
       try {
@@ -49,12 +32,12 @@ function Home() {
 
     setLoading(true)
     try {
-      const searchResults = await searchMovies(searchQuery)
-      setMovies(searchResults)
+      const searchResults = await searchGames(searchQuery)
+      setGames(searchResults)
       setError(null)
     } catch (err) {
       console.log(err)
-      setError('Failed to search movies...')
+      setError('Игра не нашлась, жаль...')
     } finally {
       setLoading(false)
     }

@@ -1,22 +1,16 @@
-const BASE_URL = 'https://api.themoviedb.org/3'
-
-export const getPopularMovies = async () => {
-  const response = await fetch(`${BASE_URL}/movie/popular?api_key=${import.meta.env.VITE_API_KEY}`)
-  const data = await response.json()
-  return data.results
-}
+const BASE_URL = 'https://api.rawg.io/api'
 
 export const getPopularGames = async () => {
-  const response = await fetch(`https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}&page_size=10`)
+  const response = await fetch(`${BASE_URL}/games?key=${import.meta.env.VITE_API_KEY}&page_size=10`)
   console.log(response)
   const data = await response.json()
   console.log(data)
-  return data.results // Includes name, background_image, etc.
+  return data.results
 }
 
-export const searchMovies = async query => {
+export const searchGames = async gameName => {
   const response = await fetch(
-    `${BASE_URL}/search/movie?api_key=${import.meta.env.VITE_API_KEY}&query=${encodeURIComponent(query)}`,
+    `${BASE_URL}/games?key=${import.meta.env.VITE_API_KEY}&search=${encodeURIComponent(gameName)}`,
   )
   const data = await response.json()
   return data.results
