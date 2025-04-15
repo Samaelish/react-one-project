@@ -6,6 +6,9 @@ function GameCard({ game }) {
   const favorite = isFavorite(game.id)
 
   const formatDate = dateString => {
+    // Если дата отсутствует или не является строкой, возвращаем заглушку
+    if (!dateString) return 'Дата не указана'
+
     const months = [
       'января',
       'февраля',
@@ -21,11 +24,22 @@ function GameCard({ game }) {
       'декабря',
     ]
 
-    const [year, month, day] = dateString.split('-')
-    return `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`
-  }
+    try {
+      const [year, month, day] = dateString.split('-')
 
-  console.log(formatDate('2011-04-18')) // Now works: "April 18, 2011"
+      // Проверяем, что все компоненты даты существуют
+      if (!year || !month || !day) return 'Некорректная дата'
+
+      // Преобразуем месяц в число и проверяем диапазон
+      const monthIndex = parseInt(month) - 1
+      if (monthIndex < 0 || monthIndex >= months.length) return 'Некорректная дата'
+
+      return `${parseInt(day)} ${months[monthIndex]} ${year}`
+    } catch (error) {
+      console.error('Ошибка форматирования даты:', error)
+      return 'Некорректный формат даты'
+    }
+  }
 
   function onFavoriteClick(e) {
     e.preventDefault()
@@ -36,7 +50,7 @@ function GameCard({ game }) {
   return (
     <div className='game-card'>
       <div className='game-poster'>
-        <img loading='lazy' src={game.background_image} alt={game.name} />
+        <img loading='lazy' src={game.background_image} alt={game.name} style={{ backgroundColor: '#1a202c' }} />
         <div className='game-overlay'>
           <button className={`favorite-btn ${favorite ? 'active' : ''}`} onClick={onFavoriteClick}>
             ♥
