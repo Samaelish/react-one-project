@@ -1,22 +1,22 @@
 import '../css/Favorites.css'
-import { useMovieContext } from '../contexts/MovieContext'
-import MovieCard from '../components/MovieCard'
+import { useGameContext } from '../contexts/GameContext'
+import GameCard from '../components/GameCard'
 
 function Favorites() {
-  const { favorites } = useMovieContext()
+  const { favorites } = useGameContext()
 
   return (
     <div className={`favorites${favorites.length ? '' : '-empty'}`}>
-      <h2>{favorites.length ? 'Your Favorites' : 'No Favorite Movies Yet'}</h2>
+      <h2>{favorites.length ? 'Твоё избранное' : 'В избранном пусто. Добавь что-нибудь!'}</h2>
 
       {favorites.length > 0 ? (
-        <div className='movies-grid'>
-          {favorites.map(movie => (
-            <MovieCard movie={movie} key={movie.id} />
+        <div className='games-grid'>
+          {favorites.map(game => (
+            <GameCard game={game} key={game.id} />
           ))}
         </div>
       ) : (
-        <p>Start adding movies to your favorites and they will appear here!</p>
+        <p>Начни добавлять в избранное игры и они появятся здесь!</p>
       )}
     </div>
   )
