@@ -16,7 +16,7 @@ function Home() {
         setGames(popularGames)
       } catch (err) {
         console.log(err)
-        setError('Failed to load games...')
+        setError('Не получилось загрузить игрули...')
       } finally {
         setLoading(false)
       }
@@ -48,20 +48,20 @@ function Home() {
       <form onSubmit={handleSearch} className='search-form'>
         <input
           type='text'
-          placeholder='Search for games...'
+          placeholder='Найди игру мечты...'
           className='search-input'
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
         />
         <button type='submit' className='search-button'>
-          Search
+          Искать
         </button>
       </form>
 
       {error && <div className='error-message'>{error}</div>}
 
       {loading ? (
-        <div className='loading'>Loading...</div>
+        <div className='loading'>Загрузка...</div>
       ) : (
         <div className='games-grid'>
           {games.map(game => (

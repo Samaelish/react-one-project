@@ -4,9 +4,7 @@ export const getPopularGames = async () => {
   const response = await fetch(
     `${BASE_URL}/games?key=${import.meta.env.VITE_API_KEY}&ordering=-metacritic&page_size=50`,
   )
-  console.log(response)
   const data = await response.json()
-  console.log(data)
   return data.results
 }
 
