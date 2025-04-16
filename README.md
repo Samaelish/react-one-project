@@ -4,4 +4,4 @@
 
 ![Website Pic](public/readmeImg.jpg)
 
-# [Смотреть демо](https://next-js-portfolio-six-rust.vercel.app/)
+# [Смотреть демо](https://react-one-project-psi.vercel.app)
