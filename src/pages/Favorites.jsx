@@ -10,7 +10,7 @@ function Favorites() {
       <h2>{favorites.length ? 'Твоё избранное' : 'В избранном пусто. Добавь что-нибудь!'}</h2>
 
       {favorites.length > 0 ? (
-        <div className='games-grid'>
+        <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 p-6 w-full box-border'>
           {favorites.map(game => (
             <GameCard game={game} key={game.id} />
           ))}

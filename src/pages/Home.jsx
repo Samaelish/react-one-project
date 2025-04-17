@@ -1,7 +1,6 @@
 import GameCard from '../components/GameCard'
 import { useState, useEffect } from 'react'
 import { searchGames, getPopularGames } from '../services/api'
-import '../css/Home.css'
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -44,16 +43,19 @@ function Home() {
   }
 
   return (
-    <div className='home'>
-      <form onSubmit={handleSearch} className='search-form'>
+    <div className='py-8 px-0 w-full'>
+      <form onSubmit={handleSearch} className='max-w-[600px] mx-auto mt-0 mb-8 flex gap-4 py-0 px-4'>
         <input
           type='text'
           placeholder='Найди игру мечты...'
-          className='search-input'
+          className='flex-1 py-3 px-4 border-0 rounded-[4px] bg-[#333] text-white text-base focus:outline-0 focus:shadow-xl outline-indigo-600 focus:outline-2'
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
         />
-        <button type='submit' className='search-button'>
+        <button
+          type='submit'
+          className='py-3 px-6 bg-red-700 text-white rounded-[4px] cursor-pointer font-medium duration-200 whitespace-nowrap hover:bg-red-500'
+        >
           Искать
         </button>
       </form>
@@ -63,7 +65,7 @@ function Home() {
       {loading ? (
         <div className='loading'>Загрузка...</div>
       ) : (
-        <div className='games-grid'>
+        <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 p-6 w-full box-border'>
           {games.map(game => (
             <GameCard game={game} key={game.id} />
           ))}

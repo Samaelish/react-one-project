@@ -1,4 +1,3 @@
-import '../css/GameCard.css'
 import { useGameContext } from '../contexts/GameContext'
 
 function GameCard({ game }) {
@@ -48,18 +47,28 @@ function GameCard({ game }) {
   }
 
   return (
-    <div className='game-card'>
-      <div className='game-poster'>
-        <img loading='lazy' src={game.background_image} alt={game.name} style={{ backgroundColor: '#1a202c' }} />
-        <div className='game-overlay'>
-          <button className={`favorite-btn ${favorite ? 'active' : ''}`} onClick={onFavoriteClick}>
+    <div className='transform hover:-translate-y-[1rem] duration-300 group relative rounded-lg overflow-hidden bg-[#1a1a1a] h-full max-w-[500px] flex flex-col'>
+      <div className='relative w-full aspect-[2/3] bg-[#2d3748]'>
+        <img
+          loading='lazy'
+          src={game.background_image}
+          alt={game.name}
+          className='w-full h-full object-cover bg-[#1a202c]'
+        />
+        <div className='absolute inset-0 bg-opacity-50 opacity-100 md:opacity-0 transition-opacity duration-200 group-hover:md:opacity-100'>
+          <button
+            className={`absolute top-4 right-4 text-2xl p-2 bg-[rgba(0,0,0,0.5)] rounded-full w-[40px] h-[40px] flex justify-center items-center hover:border-indigo-700 border-2 ${
+              favorite ? 'text-[#ff4757]' : 'text-white'
+            }`}
+            onClick={onFavoriteClick}
+          >
             ♥
           </button>
         </div>
       </div>
-      <div className='game-info'>
-        <h3>Название: {game.name}</h3>
-        <p>Год выпуска: {`${formatDate(game.released)}`}</p>
+      <div className='p-4 flex-1 flex flex-col gap-2'>
+        <h3 className='text-base m-0'>Название: {game.name}</h3>
+        <p className='text-[#999] text-[0.9rem]'>Год выпуска: {`${formatDate(game.released)}`}</p>
       </div>
     </div>
   )

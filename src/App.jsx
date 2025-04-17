@@ -1,4 +1,3 @@
-import './css/App.css'
 import Favorites from './pages/Favorites'
 import Home from './pages/Home'
 import { Routes, Route } from 'react-router-dom'
@@ -9,7 +8,7 @@ function App() {
   return (
     <GameProvider>
       <NavBar />
-      <main className='main-content'>
+      <main className='flex flex-col flex-1 p-8 box-border w-full'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/favorites' element={<Favorites />} />
